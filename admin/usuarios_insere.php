@@ -1,24 +1,17 @@
 <?php
 include "../conn/connect.php";
-
-($_SERVER["REQUEST_METHOD"] == "POST");
+include "acesso_com.php";
+if($_POST){
     $login = $_POST['login'];
     $senha = $_POST['senha'];
     $nivel = $_POST['nivel'];
     
-      
-    try{
-        $sql = "INSERT INTO usuarios ( login, senha, nivel) VALUES (:login , :senha, :nivel)";
-        $stmt = $pdo->prepare($sql);
-        $stmt->bindParam(':login', $login);
-        $stmt->bindParam(':senha', $senha);
-        $stmt->bindParam(':nivel', $nivel);
-        $stmt->execute();
-    }catch (PDOException $e){
-        echo "Erro: " .$e->getMessage();
-    }
-   
-    
+    $insereUsuario = "insert into usuarios (login, senha, nivel) values ( '$login', '$senha', '$nivel')";
+    $resultado = $conn->query($insereUsuario);
+    if(mysqli_insert_id($conn)){
+        header('location: usuarios_lista.php');
+    } 
+}
 ?>
 <!-- html:5 -->
 <!DOCTYPE html>
@@ -50,7 +43,7 @@ include "../conn/connect.php";
         <div class="alert alert-info">
             <form action="usuarios_insere.php" name="form_insere_usuario" id="form_insere_usuario" method="POST" enctype="multipart/form-data">
                 <!-- input login_usuario -->
-                <label for="login_usuario">Login:</label>
+                <label for="login">Login:</label>
                 <div class="input-group">
                     <span class="input-group-addon">
                         <span class="glyphicon glyphicon-user" aria-hidden="true"></span>
@@ -75,10 +68,10 @@ include "../conn/connect.php";
                 <label for="nivel">Nível do usuário</label>
                         <div class="input-group">
                             <label for="nivel_c" class="radio-inline">
-                                <input type="radio" name="nivel_usuario" id="nivel" value="com" checked>Comum
+                                <input type="radio" name="nivel" id="nivel" value="com" checked>Comum
                             </label>
                             <label for="nivel_s" class="radio-inline">
-                                <input type="radio" name="nivel_usuario" id="nivel" value="sup">Supervisor
+                                <input type="radio" name="nivel" id="nivel" value="sup">Supervisor
                             </label>
                         </div><!-- fecha input-group -->
                         <br>

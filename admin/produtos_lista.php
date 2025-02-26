@@ -8,9 +8,6 @@ $lista = $conn->query("select * from vw_produtos");
 $row = $lista->fetch_assoc();
 $rows = $lista->num_rows;
 
-
-
-
 ?>
 <!DOCTYPE html>
 <html lang="pt-BR">
