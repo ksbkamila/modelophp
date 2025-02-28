@@ -73,6 +73,8 @@ if($numRow > 0){
                                         <input type="password" name="senha" id="senha" class="form-control" required autocomplete="off" placeholder="Digite sua senha.">
                                     </p>
                                     <p class="text-right">
+                                        <a href="clientes_insere.php">Cadastre aqui</a>
+                                    
                                         <input type="submit" value="Entrar" class="btn btn-primary">
                                     </p>
                                 </form>
